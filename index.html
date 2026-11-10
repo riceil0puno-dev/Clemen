@@ -1,0 +1,818 @@
+<html style="margin:0;padding:0;">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+(function(){
+  var s=document.createElement('style');
+  s.textContent=[
+    ':root{--bg:#faf6ee;--card:#fffdf8;--text:#2b2118;--muted:#7a6b5a;--accent:#b87a1f;--accent-soft:rgba(184,122,31,.14);--accent2:#0d6b4f;--accent2-soft:rgba(13,107,79,.12);--sun:#e8a91c;--flagred:#b8342c;--border:rgba(80,60,30,.14);--pos:#0d7a5f;--pos-soft:rgba(13,122,95,.12);--neg:#b8342c;--neg-soft:rgba(184,52,44,.10);--neu:#b8860b;--neu-soft:rgba(184,134,11,.13)}',
+    'body{background:var(--bg);color:var(--text);font-family:"Public Sans",sans-serif}',
+    '.serif{font-family:"Playfair Display",serif}',
+    '.cite{font-style:italic;font-variant:small-caps;letter-spacing:.04em;font-size:12px;color:var(--muted)}',
+    '.mcard{position:relative;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--vc);border-radius:10px;padding:18px 20px;transition:transform .2s ease,box-shadow .2s ease}',
+    '.mcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(60,40,10,.10)}',
+    '.mcard .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.04em;background:color-mix(in srgb,var(--vc) 12%,transparent);color:var(--vc);border:1px solid var(--vc)}',
+    '.mcard .icontile{width:36px;height:36px;border-radius:9px;background:color-mix(in srgb,var(--vc) 12%,transparent);color:var(--vc);display:flex;align-items:center;justify-content:center;flex-shrink:0}',
+    '.opt{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:10px;padding:14px 16px;margin-bottom:10px;transition:border-color .15s,background .15s,transform .1s}',
+    '.opt:hover{border-color:var(--accent);background:var(--accent-soft)}',
+    '.opt.sel{border-color:var(--accent2);background:var(--accent2-soft);box-shadow:0 0 0 1px var(--accent2)}',
+    '.opt .dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid var(--muted);margin-right:10px;vertical-align:middle}',
+    '.opt.sel .dot{border-color:var(--accent2);background:var(--accent2)}',
+    '.btn-primary{padding:11px 26px;border-radius:10px;font-weight:600;background:var(--accent);color:#fffdf8;border:1px solid var(--accent);cursor:pointer;font-size:15px;transition:opacity .15s}',
+    '.btn-primary:hover{opacity:.88}',
+    '.btn-primary:disabled{opacity:.35;cursor:not-allowed}',
+    '.btn-ghost{padding:11px 20px;border-radius:10px;font-weight:600;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;font-size:15px}',
+    '.btn-ghost:disabled{opacity:.35;cursor:not-allowed}',
+    '.bar-track{height:14px;background:rgba(120,90,40,.10);border-radius:7px;overflow:hidden}',
+    '.bar-fill{height:100%;border-radius:7px;transition:width .8s ease}',
+    '.sunspin{transform-box:fill-box;transform-origin:center;animation:slowspin 60s linear infinite}',
+    '@keyframes slowspin{to{transform:rotate(360deg)}}',
+    '.reveal{opacity:0;transform:translateY(16px);animation:fadeUp .6s ease forwards}',
+    '.reveal:nth-child(2){animation-delay:.08s}.reveal:nth-child(3){animation-delay:.16s}.reveal:nth-child(4){animation-delay:.24s}',
+    '@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}',
+    '.hairline{border-top:1px solid var(--border)}',
+    '.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600}'
+  ].join('');
+  document.head.appendChild(s);
+})();
+</script>
+<div style="background-color:transparent;box-sizing:border-box;">
+<div style="background:var(--bg);color:var(--text);font-family:'Public Sans',sans-serif;min-height:100%;">
+<div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+  <!-- ============ HERO ============ -->
+  <div class="reveal text-center mb-10" style="position:relative;">
+    <div style="display:flex;justify-content:center;margin-bottom:14px;">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <g class="sunspin" stroke="var(--sun)" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="32" cy="32" r="9" fill="var(--sun)" stroke="none"/>
+          <path d="M32 6v8M32 50v8M6 32h8M50 32h8M13.6 13.6l5.7 5.7M44.7 44.7l5.7 5.7M50.4 13.6l-5.7 5.7M19.3 44.7l-5.7 5.7"/>
+        </g>
+        <g fill="var(--flagred)">
+          <path d="M14 46l1.6 3.4 3.7.5-2.7 2.6.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z"/>
+          <path d="M50 46l1.6 3.4 3.7.5-2.7 2.6.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z"/>
+          <path d="M32 52l1.6 3.4 3.7.5-2.7 2.6.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z"/>
+        </g>
+      </svg>
+    </div>
+    <p class="kicker mb-3">A Cultural-Psychology Reader &amp; Perception Check</p>
+    <h1 class="serif" style="font-size:clamp(30px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-.01em;">The Filipino Mind<br><span style="color:var(--accent2);font-style:italic;">Three Eras, One Lens</span></h1>
+    <p class="mt-4 mx-auto" style="max-width:620px;color:var(--muted);line-height:1.7;font-size:15px;">How colonial history, indigenous roots, and digital modernity layered the interpretive habits Filipinos use every day — and a 50-question interactive check on how <em>you</em> read the world.</p>
+
+    <!-- Era timeline -->
+    <div class="mt-10 mx-auto" style="max-width:640px;position:relative;">
+      <div style="position:absolute;top:14px;left:5%;right:5%;height:2px;background:linear-gradient(90deg,var(--pos),var(--neu),var(--neg));"></div>
+      <div style="display:flex;justify-content:space-between;position:relative;">
+        <div style="text-align:center;width:30%;"><div style="width:28px;height:28px;border-radius:50%;background:var(--pos);margin:0 auto;border:3px solid var(--bg);"></div><p class="serif mt-2" style="font-weight:700;font-size:14px;">Pre-1565</p><p style="font-size:11px;color:var(--muted);">Indigenous roots</p></div>
+        <div style="text-align:center;width:30%;"><div style="width:28px;height:28px;border-radius:50%;background:var(--neu);margin:0 auto;border:3px solid var(--bg);"></div><p class="serif mt-2" style="font-weight:700;font-size:14px;">1565&ndash;1946</p><p style="font-size:11px;color:var(--muted);">Spanish &amp; American rule</p></div>
+        <div style="text-align:center;width:30%;"><div style="width:28px;height:28px;border-radius:50%;background:var(--neg);margin:0 auto;border:3px solid var(--bg);"></div><p class="serif mt-2" style="font-weight:700;font-size:14px;">1946&ndash;Present</p><p style="font-size:11px;color:var(--muted);">Republic &amp; digital age</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- rice-terraces divider -->
+  <svg width="100%" height="22" viewBox="0 0 800 22" preserveAspectRatio="none" style="display:block;margin:8px 0 28px;" aria-hidden="true">
+    <g fill="none" stroke="var(--accent)" stroke-width="1.2" opacity=".45">
+      <path d="M0 18 H120 V14 H260 V10 H420 V6 H580 V10 H700 V14 H800"/>
+      <path d="M0 20 H100 V17 H240 V13 H400 V9 H560 V13 H680 V17 H800"/>
+    </g>
+  </svg>
+
+  <!-- ============ SECTION 1: WHAT MENTALITY IS ============ -->
+  <div class="mb-14">
+    <p class="kicker mb-2">Section One</p>
+    <h2 class="serif mb-6" style="font-size:28px;font-weight:700;">What &ldquo;mentality&rdquo; really is</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="reveal" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;">
+        <p style="line-height:1.75;font-size:14.5px;">Perception is not a camera. Memory is reconstructive: <strong>Frederic Bartlett (1932)</strong> showed that people recall stories by reshaping them to fit existing <em>schemas</em> — mental frameworks that organize expectation. <strong>Ulric Neisser (1976)</strong> later described a <em>perceptual cycle</em>: schemas direct what we sample from the world, and those samples modify the schema in turn. We do not see situations raw; we <em>read</em> them through lenses we did not choose alone.</p>
+      </div>
+      <div class="reveal" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;">
+        <p style="line-height:1.75;font-size:14.5px;"><strong>Daryl Bem&rsquo;s self-perception theory (1972)</strong> adds that we infer our own attitudes partly from watching our own behavior — so repeated action hardens into interpretive habit. <strong>Carol Dweck (2006)</strong> demonstrated one such lens, <em>mindset</em>: the belief that ability is fixed versus growable shapes how people respond to failure. But mindset is a <em>specific</em> belief about malleability — narrower than mentality as a whole.</p>
+      </div>
+    </div>
+
+    <div class="reveal mt-4" style="border-left:4px solid var(--accent);background:var(--accent-soft);padding:18px 22px;border-radius:0 10px 10px 0;">
+      <p class="serif" style="font-size:17px;font-weight:600;margin-bottom:8px;">Working definition</p>
+      <p style="line-height:1.75;font-size:14.5px;"><strong>Mentality</strong> is a socially transmitted, culturally patterned interpretive lens — a relatively stable set of assumptions, values, and attribution habits that shapes how a person perceives and reacts to situations. It is not a mood (a transient affective state that passes in hours) and not merely a mindset (one specific belief about ability). It is the <em>grammar</em> of perception a group shares.</p>
+    </div>
+
+    <div class="reveal mt-4" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <p style="line-height:1.75;font-size:14.5px;">Culture writes these lenses. Shared history — colonialism, migration, recurring scarcity — produces shared perceptual habits. A people repeatedly told their culture is inferior will, over generations, often read local products, local accents, and local skin through that inferiorizing frame. A people organized around mutual aid will read a stranger&rsquo;s trouble as, in some sense, their own. This is why Filipino mentality is not a single thing but a stack: <strong>indigenous, colonial, and modern layers</strong>, each still active in how a Filipino interprets a promotion, a typhoon, a favor, or a tardy friend. The sections below map that stack — and the quiz that follows lets you observe your own lens at work.</p>
+    </div>
+  </div>
+
+  <div class="hairline mb-14"></div>
+
+  <!-- ============ SECTION 2: TAXONOMY ============ -->
+  <div class="mb-14">
+    <p class="kicker mb-2">Section Two</p>
+    <h2 class="serif mb-4" style="font-size:28px;font-weight:700;">A taxonomy of Filipino mentality, three eras</h2>
+
+    <!-- COLOR LEGEND -->
+    <div class="mb-8 p-4" style="background:var(--card);border:1px solid var(--border);border-radius:12px;">
+      <p style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;">Valence legend — applied to every card&rsquo;s left border, badge, and icon</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;"><span style="width:14px;height:14px;border-radius:4px;background:var(--pos);"></span> Positive / Constructive (emerald &middot; teal &middot; green)</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;"><span style="width:14px;height:14px;border-radius:4px;background:var(--neg);"></span> Negative / Dysfunctional (rust &middot; red &middot; orange)</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;"><span style="width:14px;height:14px;border-radius:4px;background:var(--neu);"></span> Neutral / Ambivalent (amber &middot; gold)</span>
+      </div>
+    </div>
+
+    <!-- ===== ERA A ===== -->
+    <div class="mb-10 p-5 sm:p-7" style="background:color-mix(in srgb,var(--pos) 6%,transparent);border-radius:14px;border:1px solid color-mix(in srgb,var(--pos) 18%,transparent);">
+      <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
+        <span class="badge" style="padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;background:var(--pos);color:#fffdf8;">ERA A</span>
+        <h3 class="serif" style="font-size:22px;font-weight:700;">Pre-colonial Philippines <span style="color:var(--muted);font-size:15px;font-weight:500;">(pre-1565) — indigenous roots</span></h3>
+      </div>
+      <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px;line-height:1.6;">Framed as largely positive: the perceptual habits that existed before, and survived beneath, colonial rule.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mcard" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="3.5"/><circle cx="16" cy="16" r="3.5"/><path d="M10.5 10.5l3 3"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Kapwa</p><p style="font-size:11.5px;color:var(--muted);">shared inner self &middot; pakikibaka / pakikisama</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The core of Sikolohiyang Pilipino: the self is not bounded but shared — the &ldquo;outsider&rdquo; (ibang tao) and &ldquo;insider&rdquo; (hindi ibang tao) are poles of one identity. To recognize kapwa is to treat even a stranger as fellow-self.</p>
+          <p class="cite mt-2">Enriquez (1994) &middot; Pe-Pua &amp; Protacio-Marcelino (2000)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20V11l7-5 7 5v9M9 20v-5h6v5"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Bayanihan</p><p style="font-size:11.5px;color:var(--muted);">communal mutual aid &middot; being heroes together</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Rooted in the barangay practice of carrying a whole house to a new site during rice-harvest season, and in collective farm labor. Work that is crushing alone becomes festive when shared.</p>
+          <p class="cite mt-2">Scott (1994, <em>Barangay</em>) &middot; McCoy &amp; Scott on barangay polity</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Pakikisama (roots)</p><p style="font-size:11.5px;color:var(--muted);">smooth interpersonal relations as harmony</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Originally the art of maintaining social accord — &ldquo;smooth interpersonal relationship&rdquo; — not mere conformity. Going along is a moral skill of keeping the group whole, later distorted under hierarchy into compliance.</p>
+          <p class="cite mt-2">Lynch (1961) &middot; Bulatao (1964)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Babaylan spirituality</p><p style="font-size:11.5px;color:var(--muted);">healer-leader &middot; harmony with nature &amp; ancestors</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The indigenous healer-leader (often women) who mediated between community, ancestors, and nature — a perceptual frame of harmony and reciprocal relation with the unseen world, suppressed but never erased under Spanish friar rule.</p>
+          <p class="cite mt-2">Salazar (1999/2000, pantayong pananaw) &middot; Scott on pre-colonial religion</p>
+        </div>
+
+        <div class="mcard md:col-span-2" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Barangay communal values</p><p style="font-size:11.5px;color:var(--muted);">collective welfare over individual &middot; kinship-polity</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The barangay was not a village but a kinship-polity in which welfare was collective and leadership was reciprocal. This layer underlies why Filipinos still read harm to one as harm to the group — and why &ldquo;pakialam&rdquo; (involvement) can feel like care rather than intrusion.</p>
+          <p class="cite mt-2">Scott (1994) &middot; Jocano (1975)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ERA B ===== -->
+    <div class="mb-10 p-5 sm:p-7" style="background:color-mix(in srgb,var(--neu) 7%,transparent);border-radius:14px;border:1px solid color-mix(in srgb,var(--neu) 22%,transparent);">
+      <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
+        <span class="badge" style="padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;background:var(--neu);color:#2b2118;">ERA B</span>
+        <h3 class="serif" style="font-size:22px;font-weight:700;">Colonial era &amp; its legacy <span style="color:var(--muted);font-size:15px;font-weight:500;">(1565&ndash;1946, continuing) — mostly negative / ambivalent</span></h3>
+      </div>
+      <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px;line-height:1.6;">Three centuries of Spanish rule plus half a century of American tutelage rewrote the lens: several indigenous values were bent toward hierarchy, dependency, and self-doubt. Frantz Fanon (1952/1967) called it the consciousness of the colonized.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mcard" style="--vc:var(--neg);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6L12 15l-5 2.4 1-5.6-4-4 5.6-.8z"/><path d="M4 20c2-3 5-4 8-4s6 1 8 4"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Colonial mentality</p><p style="font-size:11.5px;color:var(--muted);">internalized inferiority &middot; foreign preference</p></div>
+            <span class="badge" style="margin-left:auto;">Negative</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The internalized belief that Filipino = less: lighter skin better, imported brands better, English more intelligent, foreign validation the only kind that counts. Measured empirically by the Colonial Mentality Scale.</p>
+          <p class="cite mt-2">David (2013, <em>Brown Skin, White Minds</em>) &middot; David &amp; Okazaki (2006) &middot; Constantino (1966, <em>The Miseducation of the Filipino</em>) &middot; Fanon (1952/1967)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-7 7c0 3 2 5 2 8h10c0-3 2-5 2-8a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Hiya</p><p style="font-size:11.5px;color:var(--muted);">shame &middot; originally protective, distorted under colonialism</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">A sense of propriety that protects social standing — but under colonial hierarchy it curdled into fear of authority and ostracism, silencing dissent and enabling compliance with abuse.</p>
+          <p class="cite mt-2">Bulatao (1964) &middot; Garchitorena (1979)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Utang na loob</p><p style="font-size:11.5px;color:var(--muted);">debt of gratitude &middot; reciprocity bent to patronage</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">A noble reciprocal bond — gratitude made durable — that colonial and elite patronage systems weaponized into political loyalty: a bag of groceries exchanged for a vote, a job for dynastic obedience.</p>
+          <p class="cite mt-2">Hollnsteiner (1961) &middot; Bulatao (1964) &middot; McCoy on patronage dynasties</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-3 5-4 10-4s8 1 10 4c-2 3-5 4-10 4s-8-1-10-4z"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Bahala na</p><p style="font-size:11.5px;color:var(--muted);">&ldquo;come what may&rdquo; &middot; fatalism vs. deterministic risk-taking</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Debated: either passive resignation under oppression, or &ldquo;deterministic risk-taking&rdquo; — active acceptance after doing what one can. Enriquez revalued it as courage amid uncertainty; colonial readings called it laziness.</p>
+          <p class="cite mt-2">Lynch (1961) &middot; Bulatao (1964) &middot; Enriquez&rsquo;s revaluation</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neg);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17l5-5 5 5M7 7l5 5 5-5"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Crab mentality</p><p style="font-size:11.5px;color:var(--muted);">pulling down those who rise &middot; scarcity hostility</p></div>
+            <span class="badge" style="margin-left:auto;">Negative</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Horizontal hostility: if I cannot rise, neither can you. Often traced to colonial divide-and-rule and real scarcity, where one person&rsquo;s gain was plausibly another&rsquo;s loss. Observed widely in popular discourse; Bulatao wrote of envy and social comparison.</p>
+          <p class="cite mt-2">Popular discourse &middot; Bulatao on envy / social comparison</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neg);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3 4 4 4 8a4 4 0 0 1-8 0c0-2 1-3 2-5 1.5 1 2 2 2 3"/><path d="M7 18c0 2 2 3 5 3s5-1 5-3"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Ningas kugon</p><p style="font-size:11.5px;color:var(--muted);">grass-fire enthusiasm that burns out</p></div>
+            <span class="badge" style="margin-left:auto;">Negative</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Projects launched in a blaze of excitement, abandoned at the tedious middle. Linked to short-term reward structures, patronage deadlines, and a political culture that rewards the photo-op over follow-through.</p>
+          <p class="cite mt-2">Bulatao (1964) &middot; Jocano (1975)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Amor propio</p><p style="font-size:11.5px;color:var(--muted);">self-esteem / face-saving &middot; sensitivity to criticism</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">A heightened regard for self-image that makes criticism feel like personal assault. Protects dignity; can also prevent honest feedback and entrench pride.</p>
+          <p class="cite mt-2">Bulatao (1964) &middot; Hollnsteiner (1961)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Filipino time</p><p style="font-size:11.5px;color:var(--muted);">chronic tardiness &middot; clock-time estrangement</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Often read as rudeness by industrial-clock standards; anthropologically, a polychronic orientation in which relationships and events take priority over the minute hand. Colonial-era estrangement from factory clock-time deepened the gap.</p>
+          <p class="cite mt-2">Jocano (1975) &middot; Bulatao (1964)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ERA C ===== -->
+    <div class="mb-6 p-5 sm:p-7" style="background:color-mix(in srgb,var(--accent) 6%,transparent);border-radius:14px;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);">
+      <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
+        <span class="badge" style="padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;background:var(--accent);color:#fffdf8;">ERA C</span>
+        <h3 class="serif" style="font-size:22px;font-weight:700;">Modern Philippines <span style="color:var(--muted);font-size:15px;font-weight:500;">(contemporary) — mixed valence</span></h3>
+      </div>
+      <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px;line-height:1.6;">The same lenses, refracted through labor migration, social media, recurring disaster, and a consumer market that still sells colonial inferiority as beauty.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">OFW / migration success frame</p><p style="font-size:11.5px;color:var(--muted);">bagong bayani &middot; remittance aspiration</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Migration as national heroism and family strategy: roughly a tenth of the population works abroad, and remittances anchor the economy. Celebrated as <em>bagong bayani</em> (new heroes), yet built on separated families and state dependence on export of labor.</p>
+          <p class="cite mt-2">Tyner (2009) &middot; Rodriguez (2010, <em>Migrants for Export</em>) &middot; Asis (2006)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neg);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Social-media disinformation perception</p><p style="font-size:11.5px;color:var(--muted);">troll armies &middot; &ldquo;alternative facts&rdquo;</p></div>
+            <span class="badge" style="margin-left:auto;">Negative</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The world&rsquo;s social-media capital became a laboratory for networked disinformation. Colonial distrust of local institutions migrated online: established media is suspect, a viral post from a friendly page is trusted.</p>
+          <p class="cite mt-2">Ong &amp; Caba&ntilde;es (2018) &middot; Curato (2017) &middot; Pertierra (2017)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1z"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">&ldquo;Pasok na sa banga&rdquo; survival pragmatism</p><p style="font-size:11.5px;color:var(--muted);">diskarte &middot; whatever-works resourcefulness</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">Ends-justify-means resourcefulness under scarcity: get it into the jar by any route. Adaptive survival when institutions fail; corrosive when it normalizes cutting corners and ignoring rules that apply to others.</p>
+          <p class="cite mt-2">E. San Juan Jr. on diskarte / survival pragmatism</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neu);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12c0-3 2-5 5-5 0 3-2 5-5 5zM12 12c0-3-2-5-5-5 0 3 2 5 5 5z"/><path d="M5 22h14"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">&ldquo;Filipino resilience&rdquo; discourse</p><p style="font-size:11.5px;color:var(--muted);">national trait vs. excuse for state failure</p></div>
+            <span class="badge" style="margin-left:auto;">Ambivalent</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">After every typhoon, the headline praises Filipino resilience. Critics counter: resilience-talk can absolve the state of disaster preparedness, turning victims&rsquo; endurance into a virtue that lets governments off the hook.</p>
+          <p class="cite mt-2">Ty (2014/2015) &middot; Ortega (2020) &middot; Bankoff (2003, <em>Cultures of Disaster</em>)</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--pos);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Revival of kapwa &amp; bayanihan</p><p style="font-size:11.5px;color:var(--muted);">community pantries 2021 &middot; disaster volunteerism</p></div>
+            <span class="badge" style="margin-left:auto;">Positive</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">When the state faltered in pandemic lockdowns, community pantries (&ldquo;magbigay ayon sa kakayahan, kumuha ayon sa pangangailangan&rdquo;) spread spontaneously — indigenous mutual aid reclaimed, not imported. Disaster volunteerism shows the same layer alive.</p>
+          <p class="cite mt-2">Claudio (2021/2022) on community pantries &middot; Cayton</p>
+        </div>
+
+        <div class="mcard" style="--vc:var(--neg);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="icontile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="5"/><path d="M10 6h4"/></svg></div>
+            <div><p class="serif" style="font-weight:700;font-size:16px;line-height:1.2;">Colonial mentality in beauty &amp; consumerism</p><p style="font-size:11.5px;color:var(--muted);">skin-whitening industry &middot; imported-brand prestige</p></div>
+            <span class="badge" style="margin-left:auto;">Negative</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.65;">The Philippines is one of the world&rsquo;s largest skin-lightening markets; English remains a class marker; imported brands command a premium. Colonial mentality did not end in 1946 — it became a consumer product line.</p>
+          <p class="cite mt-2">David (2013) &middot; Thompson (2010) &middot; skin-lightening market studies</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hairline mb-14"></div>
+
+  <!-- ============ SECTION 3: QUIZ ============ -->
+  <div class="mb-10">
+    <p class="kicker mb-2">Section Three</p>
+    <h2 class="serif mb-3" style="font-size:28px;font-weight:700;">The perception check &mdash; 50 questions</h2>
+    <p style="color:var(--muted);font-size:14.5px;line-height:1.7;max-width:640px;margin-bottom:20px;">No question asks &ldquo;do you have X mentality.&rdquo; Instead, each presents an everyday scenario and asks which interpretation is closest to your first thought. Your choices reveal which lenses you habitually reach for. You can go back and change answers. Takes about 5&ndash;7 minutes.</p>
+
+    <div id="quizwrap" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(60,40,10,.06);">
+
+      <!-- START SCREEN -->
+      <div id="qstart">
+        <div style="text-align:center;padding:20px 10px;">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 14px;"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          <p class="serif" style="font-size:20px;font-weight:700;margin-bottom:8px;">How do you read the world?</p>
+          <p style="color:var(--muted);font-size:13.5px;max-width:460px;margin:0 auto 20px;line-height:1.6;">50 everyday scenarios. Four interpretations each. Pick the one closest to your first thought &mdash; there are no right answers, only lenses. At the end you&rsquo;ll see your profile across eight dimensions.</p>
+          <button id="btnstart" class="btn-primary">Begin the perception check</button>
+          <p style="font-size:11.5px;color:var(--muted);margin-top:12px;">Eight dimensions: Colonial Mentality &middot; Kapwa &middot; Bahala-na &middot; Hiya &middot; Crab/Scarcity &middot; Bayanihan &middot; Ningas-kugon &middot; Utang-na-loob</p>
+        </div>
+      </div>
+
+      <!-- QUIZ SCREEN -->
+      <div id="qscreen" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12.5px;color:var(--muted);">
+          <span id="qcount">Question 1 of 50</span>
+          <span id="qanswered">Answered 0 / 50</span>
+        </div>
+        <div class="bar-track" style="margin-bottom:20px;"><div id="qprogress" class="bar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent));"></div></div>
+        <p id="qtext" class="serif" style="font-size:18px;font-weight:600;line-height:1.5;margin-bottom:18px;min-height:54px;"></p>
+        <div id="qopts"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:18px;flex-wrap:wrap;gap:10px;">
+          <button id="btnback" class="btn-ghost">&larr; Back</button>
+          <button id="btnnext" class="btn-primary" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- RESULT SCREEN -->
+      <div id="qresult" style="display:none;">
+        <p class="kicker mb-2">Your perception profile</p>
+        <h3 class="serif mb-4" style="font-size:22px;font-weight:700;">Eight lenses, measured</h3>
+        <div id="bars" style="height:380px;width:100%;"></div>
+        <div id="interpret" style="margin-top:18px;padding:16px 18px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;line-height:1.7;font-size:14px;"></div>
+        <div id="notes" style="margin-top:14px;"></div>
+        <div style="text-align:center;margin-top:22px;">
+          <button id="btnretake" class="btn-primary">Retake quiz</button>
+          <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">Scores are normalized 0&ndash;100 per dimension from your option weights. This is a reflective tool, not a clinical diagnosis.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="mt-16 pt-6 hairline" style="text-align:center;">
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;">Scholarship cited: Bartlett (1932) &middot; Neisser (1976) &middot; Bem (1972) &middot; Dweck (2006) &middot; Enriquez (1994) &middot; Pe-Pua &amp; Protacio-Marcelino (2000) &middot; Scott (1994) &middot; Lynch (1961) &middot; Bulatao (1964) &middot; Salazar (1999/2000) &middot; Jocano (1975) &middot; David (2013) &middot; David &amp; Okazaki (2006) &middot; Constantino (1966) &middot; Fanon (1952/1967) &middot; Garchitorena (1979) &middot; Hollnsteiner (1961) &middot; McCoy &middot; Tyner (2009) &middot; Rodriguez (2010) &middot; Asis (2006) &middot; Ong &amp; Caba&ntilde;es (2018) &middot; Curato (2017) &middot; Pertierra (2017) &middot; Ty (2014/2015) &middot; Ortega (2020) &middot; Bankoff (2003) &middot; Claudio (2021/2022) &middot; Thompson (2010) &middot; E. San Juan Jr.</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">A cultural-psychology reader &amp; interactive perception check &middot; three eras, one lens</p>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script>
+(function(){
+  var DIMS=[
+    {id:'c', name:'Colonial Mentality', sub:'internalized inferiority / foreign preference', v:'neg', color:'#b8342c'},
+    {id:'k', name:'Kapwa Orientation', sub:'shared-self / inclusive empathy', v:'pos', color:'#0d7a5f'},
+    {id:'f', name:'Bahala-na Fatalism', sub:'passive acceptance vs agency', v:'neu', color:'#b8860b'},
+    {id:'h', name:'Hiya-Conformity', sub:'shame-driven compliance', v:'neg', color:'#c05621'},
+    {id:'r', name:'Crab / Scarcity', sub:'horizontal hostility / zero-sum thinking', v:'neg', color:'#a8402a'},
+    {id:'b', name:'Bayanihan / Abundance', sub:'mutual aid / collective orientation', v:'pos', color:'#0f766e'},
+    {id:'n', name:'Ningas-kugon', sub:'short-lived enthusiasm vs follow-through', v:'neu', color:'#c9923c'},
+    {id:'u', name:'Utang-na-loob', sub:'reciprocity expectation / patronage tolerance', v:'neu', color:'#b8860b'}
+  ];
+  var PATTERN={
+    c:{t:'Colonial-frame perceiver', d:'You often interpret value through a foreign lens — assuming imported, English-medium, or fairer equals better. This is an internalized habit formed by centuries of colonial miseducation (David, 2013; Constantino, 1966). The good news: because it is learned, it can be unlearned — test each "foreign = better" assumption against evidence.'},
+    k:{t:'Kapwa-centered perceiver', d:'You readily treat others as shared-self (Enriquez, 1994). Your first read of a situation includes the other person\'s dignity; strangers become "insiders" quickly. This is your strongest indigenous perceptual resource and the foundation of real bayanihan in you.'},
+    f:{t:'Bahala-na acceptor', d:'You lean on come-what-may acceptance. Sometimes it is wise detachment; sometimes it replaces agency (Lynch, 1961). Notice which mode is operating the next time you say "bahala na" — and pair acceptance with one small actionable step.'},
+    h:{t:'Hiya-sensitive conformer', d:'You read situations through shame and approval (Bulatao, 1964). Protecting others\' feelings is noble, but when hiya silences your own needs and rights, the originally protective emotion has drifted into compliance. Practice small, low-stakes assertions.'},
+    r:{t:'Scarcity-frame perceiver', d:'You tend to read others\' success as your loss — the zero-sum, crab-in-a-bucket habit conditioned by scarcity and colonial divide-and-rule. The antidote is abundance practice: celebrate wins openly and ask how the rising tide might lift you too.'},
+    b:{t:'Bayanihan-oriented perceiver', d:'You default to collective, mutual-aid readings of situations. You see the group\'s capacity before the individual\'s burden — the indigenous bayanihan impulse alive and well in how you interpret a problem.'},
+    n:{t:'Burst-starter', d:'Your enthusiasm outruns your follow-through — the ningas-kugon pattern. You read long projects as exciting at the start, tedious at the middle. Pick one current commitment and finish it before starting the next; completion rewires the habit.'},
+    u:{t:'Reciprocity-led perceiver', d:'You read favors through a strong ledger of utang na loob. Gratitude is noble; the risk is when genuine reciprocity slides into patronage tolerance. Distinguish what you truly owe from what others exploit.'}
+  };
+  var GROW={
+    c:'Your interpretations often favor foreign frames over local ones. Try noticing when you dismiss a Filipino-made, -said, or -grown thing as "less than" — and test that assumption against evidence.',
+    h:'You often read situations through shame and approval. Practice separating "what will people say" from "what is right for me"; small low-stakes assertions build comfort.',
+    r:'You tend to interpret others\' success as your loss. Try the opposite framing: someone rising often creates ladders — ask how you can share in, rather than block, the climb.',
+    f:'You lean on "come what may" acceptance. Notice where it serves you (letting go) vs where it replaces planning (passivity); pair acceptance with one small actionable step.',
+    n:'Your enthusiasm outpaces follow-through. Pick a single current commitment and finish it before starting the next; completion rewrites the ningas-kugon pattern.',
+    u:'You read favors as permanent debts. Distinguish genuine gratitude from exploitative patronage: reciprocity need not mean obedience.',
+    k:'Your self-reading leans individualistic. Small acts of treating a stranger as "insider" — a greeting, a shared meal — stretch the kapwa muscle.',
+    b:'You default to solo solutions. Next time, try asking one person to join a small task; mutual aid multiplies effort and joy.'
+  };
+
+  var Q=[
+    // c - colonial (7)
+    {s:"A local Filipino brand and a famous imported brand cost the same. Your first assumption:", o:[
+      ["The imported one is almost certainly better made.",{c:3}],
+      ["I would check reviews; origin alone does not decide quality.",{c:0,k:1}],
+      ["Usually imported is better, but a few local brands are okay.",{c:2}],
+      ["Local brands often match or exceed; I would try the local one first.",{c:0,b:1}]]},
+    {s:"A Filipino researcher publishes a finding locally, another publishes abroad. You think:", o:[
+      ["If it was not published abroad, it probably is not world-class.",{c:3}],
+      ["Venue matters less than the evidence and method.",{c:0}],
+      ["International publication is usually a sign of stronger work.",{c:2}],
+      ["Local-context research is often most valuable published at home.",{c:0,k:1}]]},
+    {s:"When you think about your own skin tone, your closest thought:", o:[
+      ["I wish I were fairer; lighter skin looks better and opens doors.",{c:3}],
+      ["I am fine with my skin as it is.",{c:0,k:1}],
+      ["A lighter shade would be nice sometimes.",{c:2}],
+      ["My skin tone is part of who I am and I would not change it.",{c:0}]]},
+    {s:"In a professional meeting, which language feels more 'impressive' to you?", o:[
+      ["Fluent English signals intelligence and class; I default to it.",{c:3}],
+      ["Use the language the group is most comfortable with.",{c:0,k:1}],
+      ["English is more impressive, so I mix it in heavily.",{c:2}],
+      ["Our own languages carry ideas English cannot.",{c:0}]]},
+    {s:"A foreign tourist praises Filipino culture warmly. You think:", o:[
+      ["If a foreigner says so, it must be true.",{c:3}],
+      ["Their praise is nice, but our own worth does not depend on it.",{c:0,k:1}],
+      ["See? Even foreigners validate us — that matters.",{c:2}],
+      ["I would rather hear it from fellow Filipinos who live it.",{c:0}]]},
+    {s:"Buying a gift for someone special. You assume:", o:[
+      ["Imported chocolates or perfume feel more 'special' than local delicacies.",{c:3}],
+      ["Local crafts and food are often more thoughtful and unique.",{c:0,b:1}],
+      ["A mix: imported for the wow factor, local for thoughtfulness.",{c:1}],
+      ["I would pick something proudly local.",{c:0,k:1}]]},
+    {s:"A policy idea: one from a local think tank, one copied from a foreign model. You lean:", o:[
+      ["The foreign model is proven; we should just copy it.",{c:3}],
+      ["Adapt what works, but ground it in our own context.",{c:0,k:1}],
+      ["Foreign models are generally more advanced.",{c:2}],
+      ["Our own solutions, grown from our soil, often fit best.",{c:0}]]},
+    // k - kapwa (7)
+    {s:"A new neighbor from a different region moves in next door. You:", o:[
+      ["Greet them, learn their name, invite them over — they are one of us now.",{k:3,b:1}],
+      ["Be polite but keep a distance until they prove themselves.",{k:1}],
+      ["Wait for them to make the first move.",{k:0,h:1}],
+      ["Smile and nod; keep to my own circle.",{k:0}]]},
+    {s:"A stranger on the bus looks lost and confused. You:", o:[
+      ["Ask if they need help and point them the right way.",{k:3,b:1}],
+      ["Help only if they ask directly.",{k:1}],
+      ["Mind my own business; they can ask the conductor.",{k:0}],
+      ["Feel bad but do nothing.",{k:0,f:1}]]},
+    {s:"Someone cuts in line in front of you. Your first move:", o:[
+      ["Let it go; maybe they are in a real hurry.",{k:3,h:1}],
+      ["Call it out firmly but kindly — it affects everyone in line.",{k:2}],
+      ["Get angry and make a scene.",{r:2,k:0}],
+      ["Quietly resent it and say nothing.",{h:2,k:0}]]},
+    {s:"A coworker struggles with a task you have mastered. You:", o:[
+      ["Walk them through it until they get it; their win is the team's win.",{k:3,b:1}],
+      ["Share a tip or two but let them figure the rest.",{k:2}],
+      ["Help if they ask, briefly.",{k:1}],
+      ["Let them learn on their own like I did.",{k:0}]]},
+    {s:"At a family gathering, a distant relative you barely know joins. You:", o:[
+      ["Make them feel included; sit with them, introduce people.",{k:3}],
+      ["Greet them once then move on.",{k:2}],
+      ["Be polite but stick with people I know.",{k:1}],
+      ["Ignore them; they will find their own way.",{k:0}]]},
+    {s:"A person on the street asks you for change. You:", o:[
+      ["Give what I can, even small — we share the same street.",{k:3,b:1}],
+      ["Buy them food instead of cash.",{k:2}],
+      ["Give sometimes, depending on my mood.",{k:1}],
+      ["They should just find work.",{r:1,k:0}]]},
+    {s:"Your town wins a regional award. You feel:", o:[
+      ["Proud of everyone; it is ours together.",{k:3,b:1}],
+      ["Proud, but it does not really affect me.",{k:1}],
+      ["Wish I had gotten individual recognition.",{r:1,k:0}],
+      ["Mostly indifferent.",{k:0}]]},
+    // f - fatalism (6)
+    {s:"A big exam is tomorrow and you are underprepared. You:", o:[
+      ["Bahala na — whatever happens, happens.",{f:3}],
+      ["Pray hard and trust it will work out.",{f:2}],
+      ["Study the highest-yield topics strategically tonight.",{f:0}],
+      ["Pull an all-nighter and do my best with what is left.",{f:1}]]},
+    {s:"A strong typhoon is forecast to hit your area. You:", o:[
+      ["Board up, prepare supplies, know the evacuation route.",{f:0,b:1}],
+      ["Prepare a little but mostly hope it veers away.",{f:2}],
+      ["Bahala na — if it hits, it hits.",{f:3}],
+      ["Trust the authorities and the weather to sort itself.",{f:1}]]},
+    {s:"You are unhappy in your job. You:", o:[
+      ["Start updating my resume and looking actively.",{f:0}],
+      ["Take a small step: talk to my boss about changes.",{f:1}],
+      ["Complain to friends but do nothing.",{f:2,h:1}],
+      ["Bahala na — maybe it will get better on its own.",{f:3}]]},
+    {s:"Heavy traffic will make you late for an important meeting. You:", o:[
+      ["Leave earlier next time; plan alternate routes.",{f:0}],
+      ["Accept it, text ahead, make the most of the time left.",{f:1}],
+      ["Stress the whole way but can not do anything.",{f:2}],
+      ["Bahala na — they will wait or they will not.",{f:3}]]},
+    {s:"A business idea requires risky capital. You:", o:[
+      ["Research, test small, then decide with data.",{f:0}],
+      ["Weigh it carefully but accept some risk is unavoidable.",{f:1}],
+      ["Go all in on instinct; what is meant to be will be.",{f:2}],
+      ["Bahala na — either it works or it does not, no point overthinking.",{f:3}]]},
+    {s:"A family member is seriously ill. You:", o:[
+      ["Seek the best care, second opinions, and support networks.",{f:0,b:1}],
+      ["Pray a lot but also do what is medically possible.",{f:1}],
+      ["Feel helpless and wait for news.",{f:2}],
+      ["Leave it to fate and prayer.",{f:3}]]},
+    // h - hiya (6)
+    {s:"Friends pressure you to drink more than you want. You:", o:[
+      ["Say no firmly; my comfort matters more than their teasing.",{h:0}],
+      ["Make an excuse and leave early.",{h:1}],
+      ["Give in a little to avoid being called KJ (killjoy).",{h:2}],
+      ["Drink to fit in; hiya prevents me from refusing.",{h:3}]]},
+    {s:"You receive clearly bad service at a restaurant. You:", o:[
+      ["Complain politely to management; it is my right.",{h:0}],
+      ["Mention it quietly to the waiter only.",{h:1}],
+      ["Leave a smaller tip but say nothing.",{h:2}],
+      ["Say nothing; I do not want to make a scene.",{h:3}]]},
+    {s:"Your boss makes a clearly wrong decision in a meeting. You:", o:[
+      ["Speak up respectfully with my concern.",{h:0}],
+      ["Hint at it gently after the meeting.",{h:1}],
+      ["Tell a colleague afterward, not the boss.",{h:2}],
+      ["Stay silent; contradicting a superior is shameful.",{h:3}]]},
+    {s:"You arrive at a party where you know no one. You:", o:[
+      ["Introduce myself to people; it is fine to be the new face.",{h:0}],
+      ["Find one person and stick near them.",{h:1}],
+      ["Stay on my phone to avoid looking awkward.",{h:2}],
+      ["Leave early; the hiya is too much.",{h:3}]]},
+    {s:"Your parents want you to take a college course you dislike. You:", o:[
+      ["Choose what fits me and explain my reasons.",{h:0}],
+      ["Compromise on a related course.",{h:1}],
+      ["Take it for a year then quietly switch.",{h:2}],
+      ["Obey them; disappointing them would shame the family.",{h:3}]]},
+    {s:"A store undercharges you by mistake. You:", o:[
+      ["Point it out and pay the correct amount.",{h:0,k:1}],
+      ["Mention it only if they notice.",{h:1}],
+      ["Keep quiet; saying something would embarrass the cashier.",{h:2}],
+      ["Say nothing and feel guilty later.",{h:3}]]},
+    // r - crab/scarcity (6)
+    {s:"A coworker gets promoted ahead of you, though you feel more qualified. You think:", o:[
+      ["Ask them what worked; learn and step up my own game.",{r:0,b:1}],
+      ["Feel envious but keep it to myself.",{r:1}],
+      ["It is unfair and I will say so to others.",{r:2}],
+      ["They must have connections or flattered the boss.",{r:3}]]},
+    {s:"A classmate tops the exam you studied hard for. You think:", o:[
+      ["Congratulate them and ask for study tips.",{r:0,k:1}],
+      ["Feel deflated and avoid them for a while.",{r:1}],
+      ["They probably cheated or got lucky.",{r:3}],
+      ["Spread a little doubt about how they did it.",{r:2}]]},
+    {s:"A neighbor's small business is booming. You think:", o:[
+      ["Happy for them; maybe we can collaborate.",{r:0,b:1}],
+      ["Quietly resent their success.",{r:1}],
+      ["Open my own competing shop right next door.",{r:2}],
+      ["They are probably cutting corners.",{r:3}]]},
+    {s:"Your sibling gets praised by your parents. You feel:", o:[
+      ["Celebrate with them; their win is the family's win.",{r:0,k:1}],
+      ["Like I am less loved.",{r:1}],
+      ["Try to one-up them with my own news.",{r:2}],
+      ["They always get everything; it is not fair.",{r:3}]]},
+    {s:"A friend posts a big achievement on social media. You:", o:[
+      ["Like and comment, genuinely proud.",{r:0,k:1}],
+      ["Scroll past without engaging.",{r:1}],
+      ["Force a like but feel jealous inside.",{r:2}],
+      ["It is probably just for show / flexing.",{r:3}]]},
+    {s:"A colleague proposes a great idea that was not yours. You:", o:[
+      ["Support it fully; good ideas should win.",{r:0,b:1}],
+      ["It is fine; I will have my own ideas next time.",{r:1}],
+      ["Quietly hope it fails so I can shine later.",{r:2}],
+      ["Point out flaws to keep them humble.",{r:3}]]},
+    // b - bayanihan (6)
+    {s:"Your barangay organizes a clean-up drive on Saturday. You:", o:[
+      ["Volunteer and bring friends; many hands make light work.",{b:3,k:1}],
+      ["Pay my share in cash instead of time.",{b:2}],
+      ["Go if I have nothing else on.",{b:1}],
+      ["Skip it; that is the barangay officials' job.",{b:0,r:1}]]},
+    {s:"A neighbor's house burns down. You:", o:[
+      ["Organize a donation drive among other neighbors.",{b:3,k:1}],
+      ["Give what I can spare.",{b:2}],
+      ["Offer prayers but no material help.",{b:1}],
+      ["Assume the government will handle it.",{b:0}]]},
+    {s:"You are moving house. You:", o:[
+      ["Ask friends and family to help; feast afterward — the bayanihan way.",{b:3,k:1}],
+      ["Ask one or two close relatives.",{b:2}],
+      ["Hire movers to avoid bothering anyone.",{b:1,h:1}],
+      ["Do it alone; I do not want to owe anyone.",{b:0}]]},
+    {s:"A community project needs funding. You:", o:[
+      ["Contribute and help fundraise collectively.",{b:3,k:1}],
+      ["Give a small amount anonymously.",{b:2}],
+      ["Wait to see if others give first.",{b:1}],
+      ["It is not my problem.",{b:0,r:1}]]},
+    {s:"During a flood, your house is dry but others are stranded. You:", o:[
+      ["Head out with food and help rescue efforts.",{b:3,k:1}],
+      ["Donate goods to those organizing relief.",{b:2}],
+      ["Share relief information online.",{b:1}],
+      ["Stay home and stay safe; I have done my part.",{b:0}]]},
+    {s:"A friend is short on tuition before the deadline. You:", o:[
+      ["Lend what I can and rally others to chip in.",{b:3,k:1}],
+      ["Lend a small amount I can afford to lose.",{b:2}],
+      ["Offer advice but no money.",{b:1}],
+      ["They should have planned better.",{b:0,r:1}]]},
+    // n - ningas-kugon (6)
+    {s:"You start a new fitness program. Your typical pattern:", o:[
+      ["Set a modest schedule and stick to it for months.",{n:0}],
+      ["Try it for a bit and quit if it is hard.",{n:1}],
+      ["Start strong, then restart every Monday.",{n:2}],
+      ["Go all in week one, lose steam by week three.",{n:3}]]},
+    {s:"You get excited about a new business idea. You:", o:[
+      ["Validate it slowly with small tests before committing.",{n:0}],
+      ["Work on it on and off with no clear plan.",{n:1}],
+      ["Start several ideas at once and finish none.",{n:2}],
+      ["Tell everyone, buy supplies, then abandon it when the grind hits.",{n:3}]]},
+    {s:"A community project you volunteered to lead. You:", o:[
+      ["Set milestones and see each through to completion.",{n:0}],
+      ["Hand it off to someone else when it gets tedious.",{n:1}],
+      ["Lose interest once the initial excitement fades.",{n:2}],
+      ["Plan the launch well but drop the follow-up meetings.",{n:3}]]},
+    {s:"Your New Year's resolutions. Typical outcome:", o:[
+      ["Pick one or two and build them into daily habits.",{n:0}],
+      ["Keep a few but drop most.",{n:1}],
+      ["Same resolutions every year, same result.",{n:2}],
+      ["Write a long list; by February most are forgotten.",{n:3}]]},
+    {s:"Learning a new skill (guitar, language, coding). You:", o:[
+      ["Practice 20 minutes daily for a year.",{n:0}],
+      ["Start, quit, restart several times.",{n:1}],
+      ["Bursts of intense practice then long gaps.",{n:2}],
+      ["Buy the course or gear, practice a week, then it gathers dust.",{n:3}]]},
+    {s:"You agree to write a report due in a month. You:", o:[
+      ["Break it into chunks and finish early.",{n:0}],
+      ["Do a little here and there, finish just on time.",{n:1}],
+      ["Do it last minute in a rushed burst.",{n:2}],
+      ["Start enthusiastically, then procrastinate until the deadline.",{n:3}]]},
+    // u - utang-na-loob (6)
+    {s:"A politician gave your family groceries before the election. You feel:", o:[
+      ["It is a gift; my vote is separate and based on platforms.",{u:0}],
+      ["I would accept but vote my conscience.",{u:1}],
+      ["I will consider them more favorably because of it.",{u:2}],
+      ["Obligated to vote for them to repay the favor.",{u:3}]]},
+    {s:"A relative got you your first job. Years later they ask you to hire their unqualified child. You:", o:[
+      ["Refuse; gratitude does not mean compromising standards.",{u:0}],
+      ["Give them an interview but hire on merit.",{u:1}],
+      ["Create a role just to accommodate them.",{u:2}],
+      ["Hire them; I owe my relative everything.",{u:3}]]},
+    {s:"A friend lent you money a year ago and is now wealthy. You:", o:[
+      ["They are rich now; they probably forgot, so I will not mention it.",{u:0}],
+      ["Pay it back when convenient, no rush.",{u:1}],
+      ["Pay it back regardless — a debt is a debt.",{u:2}],
+      ["Repay with interest plus a gift to show gratitude.",{u:3}]]},
+    {s:"Someone does you a big favor. Your first thought:", o:[
+      ["Favors among friends do not need counting.",{u:0,k:1}],
+      ["I am grateful and will help if they ever need it, naturally.",{u:1}],
+      ["I keep a mental ledger of who owes whom.",{u:2}],
+      ["I immediately think about how and when I can repay it.",{u:3}]]},
+    {s:"A powerful patron offers to 'fix' your problem with officials, in exchange for future loyalty. You:", o:[
+      ["Decline; I would rather go through proper channels.",{u:0}],
+      ["Accept only as a last resort.",{u:1}],
+      ["Accept but feel uneasy about it.",{u:2}],
+      ["Accept; that is how things get done here.",{u:3}]]},
+    {s:"Your parents paid for your education; now they expect you to fund your sibling's schooling. You:", o:[
+      ["That is their responsibility, not mine.",{u:0}],
+      ["Help what I can, but my own life matters too.",{u:1}],
+      ["It is expected in our family, so I will do it.",{u:2}],
+      ["Of course — I owe them everything; it is my duty.",{u:3}]]}
+  ];
+
+  var answers=new Array(50).fill(null);
+  var cur=0;
+  var elStart=document.getElementById('qstart');
+  var elScreen=document.getElementById('qscreen');
+  var elResult=document.getElementById('qresult');
+  var elText=document.getElementById('qtext');
+  var elOpts=document.getElementById('qopts');
+  var elCount=document.getElementById('qcount');
+  var elAns=document.getElementById('qanswered');
+  var elProg=document.getElementById('qprogress');
+  var btnBack=document.getElementById('btnback');
+  var btnNext=document.getElementById('btnnext');
+  var btnStart=document.getElementById('btnstart');
+  var btnRetake=document.getElementById('btnretake');
+
+  function answeredCount(){var n=0;for(var i=0;i<50;i++){if(answers[i]!==null)n++;}return n;}
+
+  function render(){
+    var q=Q[cur];
+    elText.textContent=(cur+1)+". "+q.s;
+    elCount.textContent="Question "+(cur+1)+" of 50";
+    var ac=answeredCount();
+    elAns.textContent="Answered "+ac+" / 50";
+    elProg.style.width=(ac/50*100)+"%";
+    var html="";
+    for(var i=0;i<q.o.length;i++){
+      var sel=(answers[cur]===i)?" sel":"";
+      html+='<div class="opt'+sel+'" data-i="'+i+'"><span class="dot"></span>'+q.o[i][0]+'</div>';
+    }
+    elOpts.innerHTML=html;
+    var opts=elOpts.querySelectorAll('.opt');
+    for(var j=0;j<opts.length;j++){
+      (function(idx){opts[idx].addEventListener('click',function(){
+        answers[cur]=idx;
+        for(var k=0;k<opts.length;k++){opts[k].classList.remove('sel');}
+        opts[idx].classList.add('sel');
+        btnNext.disabled=false;
+        elAns.textContent="Answered "+answeredCount()+" / 50";
+        elProg.style.width=(answeredCount()/50*100)+"%";
+      });})(j);
+    }
+    btnBack.disabled=(cur===0);
+    btnNext.disabled=(answers[cur]===null);
+    btnNext.textContent=(cur===49)?"See my results":"Next →";
+  }
+
+  function showResults(){
+    var maxs={c:0,k:0,f:0,h:0,r:0,b:0,n:0,u:0};
+    var sums={c:0,k:0,f:0,h:0,r:0,b:0,n:0,u:0};
+    Q.forEach(function(q){
+      var perQ={c:0,k:0,f:0,h:0,r:0,b:0,n:0,u:0};
+      q.o.forEach(function(opt){var w=opt[1];for(var d in w){if(w[d]>perQ[d])perQ[d]=w[d];}});
+      for(var d in perQ){maxs[d]+=perQ[d];}
+    });
+    answers.forEach(function(ai,qi){
+      if(ai===null)return;
+      var w=Q[qi].o[ai][1];
+      for(var d in w){sums[d]+=w[d];}
+    });
+    var scores={};
+    DIMS.forEach(function(dm){scores[dm.id]=maxs[dm.id]>0?Math.round(sums[dm.id]/maxs[dm.id]*100):0;});
+
+    var barsHtml='';
+    DIMS.forEach(function(dm){
+      var sc=scores[dm.id];
+      barsHtml+='<div style="margin-bottom:14px;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">'
+        +'<span style="font-size:13px;font-weight:600;">'+dm.name+' <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— '+dm.sub+'</span></span>'
+        +'<span style="font-size:13px;font-weight:700;color:'+dm.color+';font-variant-numeric:tabular-nums;">'+sc+'</span>'
+        +'</div>'
+        +'<div class="bar-track"><div class="bar-fill" style="width:'+sc+'%;background:'+dm.color+';"></div></div>'
+        +'</div>';
+    });
+    document.getElementById('bars').innerHTML=barsHtml;
+
+    var sorted=DIMS.slice().sort(function(a,b){return scores[b.id]-scores[a.id];});
+    var top=sorted[0], second=sorted[1];
+    var elInt=document.getElementById('interpret');
+    elInt.innerHTML='<p style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px;">Dominant pattern</p>'
+      +'<p class="serif" style="font-size:18px;font-weight:700;margin-bottom:8px;">'+PATTERN[top.id].t+'</p>'
+      +'<p>'+PATTERN[top.id].d+'</p>'
+      +'<p style="margin-top:8px;color:var(--muted);font-size:13px;">Secondary lens: <strong>'+second.name+'</strong> ('+scores[second.id]+'/100). Your perception habits are a stack — no single label defines you.</p>';
+
+    var notes=[];
+    var dys=['c','h','r','f','n','u'];
+    var dysSorted=dys.slice().sort(function(a,b){return scores[b]-scores[a];});
+    if(scores[dysSorted[0]]>=50){notes.push({dim:dysSorted[0],text:GROW[dysSorted[0]],color:'#b8342c'});}
+    var cons=['k','b'];
+    var consSorted=cons.slice().sort(function(a,b){return scores[a]-scores[b];});
+    if(scores[consSorted[0]]<60){notes.push({dim:consSorted[0],text:GROW[consSorted[0]],color:'#0d7a5f'});}
+    if(scores.k>=70||scores.b>=70){notes.push({dim:scores.k>=scores.b?'k':'b',text:'Strength to lean on: your '+((scores.k>=scores.b)?'kapwa':'bayanihan')+' orientation is strong ('+Math.max(scores.k,scores.b)+'/100). In difficult situations, this inclusive, collective lens is often the wisest one to trust.',color:'#0d7a5f'});}
+    if(notes.length===0){notes.push({dim:'k',text:'Your profile is balanced across lenses. A good next practice: notice which lens you reach for under stress — stress reveals the default.',color:'#b8860b'});}
+    var notesHtml='<p style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px;">Growth notes for you</p>';
+    notes.forEach(function(nt){
+      notesHtml+='<div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;"><span style="color:'+nt.color+';font-weight:700;flex-shrink:0;">●</span><p style="font-size:13.5px;line-height:1.6;margin:0;">'+nt.text+'</p></div>';
+    });
+    document.getElementById('notes').innerHTML=notesHtml;
+
+    elScreen.style.display='none';
+    elResult.style.display='block';
+  }
+
+  btnStart.addEventListener('click',function(){elStart.style.display='none';elScreen.style.display='block';cur=0;render();});
+  btnBack.addEventListener('click',function(){if(cur>0){cur--;render();}});
+  btnNext.addEventListener('click',function(){
+    if(answers[cur]===null)return;
+    if(cur<49){cur++;render();}else{showResults();}
+  });
+  btnRetake.addEventListener('click',function(){
+    answers=new Array(50).fill(null);cur=0;
+    elResult.style.display='none';
+    elScreen.style.display='none';
+    elStart.style.display='block';
+  });
+})();
+</script>
+</html>
